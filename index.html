@@ -1,0 +1,207 @@
+<html>
+
+<head>
+    <style>
+        #arm1 {
+            transform: scaleY(-1);
+            width: 100px;
+            position: absolute;
+            height: 150px;
+            top: 330px;
+            left: 0px;
+            transform: rotate(100deg);
+        }
+
+        #head {
+            transform: scaleX(-1);
+            top: 205px;
+            left: 45px;
+            width: 300px;
+            position: absolute;
+        }
+
+        #body {
+            top: 320px;
+            left: 0px;
+            height: 300px;
+            position: absolute;
+        }
+
+        #leg1,
+        #leg2 {
+            transform-origin: top;
+            background-image: url(leg.png);
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
+            width: 110px;
+            position: absolute;
+            top: 440px;
+            left: 100px;
+            transform: scaleX(1);
+            animation: moveright 0.4s infinite;
+            height: 250px;
+
+        }
+
+        @keyframes moveright {
+            0% {
+                transform: rotate(40deg);
+            }
+
+            50% {
+                transform: rotate(-40deg);
+            }
+
+            100% {
+                transform: rotate(40deg);
+            }
+        }
+
+        #leg2 {
+            transform: scaleX(-1);
+            left: 90px;
+            animation: moveleft 0.4s infinite;
+        }
+
+        @keyframes moveleft {
+            0% {
+                transform: rotate(-40deg);
+            }
+
+            50% {
+                transform: rotate(40deg);
+            }
+
+            100% {
+                transform: rotate(-40deg);
+            }
+        }
+
+        #corona {
+            right: 100px;
+            float: right;
+            width: 200px;
+        }
+
+        body {
+            text-align: center;
+            background-image: url('https://st3.depositphotos.com/1302980/19340/v/600/depositphotos_193401122-stock-video-seamless-street-city-parallax-effect.jpg');
+            background-repeat: repeat;
+            background-size: cover;
+            animation: backgroundScroll 5s linear infinite;
+        }
+
+        @keyframes backgroundScroll {
+            0% {
+                background-position: 0 0;
+            }
+
+            100% {
+                background-position: 5000px 0px;
+            }
+
+        }
+
+
+
+
+
+
+
+
+
+        .left {    
+            transform: scaleX(-1);
+            filter: FlipH;
+        }
+
+        .right {
+            transform: scaleX(1);
+            filter: FlipH;
+        }
+
+        #bee {
+            transition: 0.1s;
+        }
+        #beee {
+            width: 100px;
+        }
+    </style>
+    <script>
+        
+    </script>
+</head>
+
+<body id="bdy"><br>
+    
+    <div id="bee">
+        <img id="beee" src="soap.png" />
+    </div>
+    <img onclick="this.style.display='none';" id="corona" src="corona.png"
+        alt=""><br><br><br><br><br><br>
+    <img onclick="this.style.display='none';" id="corona" src="corona.png"
+        alt=""><br><br><br><br><br>
+    <br><br><br><br><br><br>
+    <img onclick="this.style.display='none'; document.getElementById('girl').style.display='none'; document.getElementById('bdy').style.backgroundImage='url(myfaceonapple.png)'; document.getElementById('youwin').style.display='block'" id="corona" src="corona.png"
+        alt=""><br><br><br>
+        <p id="youwin" style="display: none; color: white;">You win!</p>
+    <div id="girl">
+        <img id="head" src="head.png" alt="">
+        <div id="leg1" src="leg.png" alt=""></div>
+        <div id="leg2" src="leg.png" alt=""></div>
+        <img id="body" src="body.png" alt="">
+        <img id="arm1" src="arm.png" alt="">
+    </div>
+    
+    <script>
+
+        var bee = document.getElementById("bee");
+        document.addEventListener("mousemove", getMouse);
+
+
+        bee.style.position = "absolute"; //css		
+        var beepos = { x: 0, y: 0 };
+
+        setInterval(followMouse, 50);
+
+        var mouse = { x: 0, y: 0 }; //mouse.x, mouse.y
+
+        var dir = "right";
+        function getMouse(e) {
+            mouse.x = e.pageX;
+            mouse.y = e.pageY;
+            //Checking directional change
+            if (mouse.x > beepos.x) {
+                dir = "right";
+            } else {
+                dir = "left";
+            }
+        }
+
+        function followMouse() {
+            //1. find distance X , distance Y
+            var distX = mouse.x - beepos.x;
+            var distY = mouse.y - beepos.y;
+            //Easing motion
+            //Progressive reduction of distance 
+            beepos.x += distX / 5;
+            beepos.y += distY / 2;
+
+            bee.style.left = beepos.x + "px";
+            bee.style.top = beepos.y + "px";
+
+
+            //Apply css class 
+            if (dir == "right") {
+                bee.setAttribute("class", "right");
+            } else {
+                bee.setAttribute("class", "left");
+            }
+
+        }
+        
+    </script>
+</body>
+
+</html>
